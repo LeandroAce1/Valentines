@@ -1,82 +1,82 @@
-// Wait for the page to load
 document.addEventListener('DOMContentLoaded', function () {
     const decorationsContainer = document.getElementById('decorations');
     const prompt = document.getElementById('prompt');
     const confettiContainer = document.getElementById('confetti');
     const promptOkButton = document.getElementById('prompt-ok');
     const promptCancelButton = document.getElementById('prompt-cancel');
-  
-    // Array of decoration emojis
-    const decorations = ['💖', '❤️', '🌷', '💐', '💘', '💕', '🌸', '💝', '💌'];
-  
+
+    // Safe emojis that work on all devices
+    const decorations = ['❤️', '💖', '🎈', '🎀', '💌', '🌹', '✨', '💘', '🎉'];
+
     // Function to add decoration to the page
     function addDecoration(emoji) {
-      const emojiElement = document.createElement('div');
-      emojiElement.classList.add('decor-item');
-      emojiElement.innerText = emoji;
-      decorationsContainer.appendChild(emojiElement);
+        const emojiElement = document.createElement('div');
+        emojiElement.classList.add('decor-item');
+        emojiElement.innerText = emoji;
+        emojiElement.style.left = `${Math.random() * 90}vw`; // Random horizontal position
+        emojiElement.style.top = `${Math.random() * 90}vh`;  // Random vertical position
+        decorationsContainer.appendChild(emojiElement);
     }
-  
-    // Populate the decoration buttons
+
+    // Create buttons dynamically for each decoration
     decorations.forEach(function (emoji) {
-      const button = document.createElement('button');
-      button.classList.add('decor-box');
-      button.innerText = `Add ${emoji}`;
-      button.onclick = function () {
-        addDecoration(emoji);
-      };
-      document.getElementById('buttons').appendChild(button);
+        const button = document.createElement('button');
+        button.classList.add('decor-box');
+        button.innerText = emoji;
+        button.onclick = function () {
+            addDecoration(emoji);
+        };
+        document.getElementById('buttons').appendChild(button);
     });
-  
-    // Pop-up prompt interaction
+
+    // Show the Valentine's prompt
     function showPrompt() {
-      prompt.style.display = 'flex';
+        prompt.style.display = 'flex';
     }
-  
+
+    // Hide the prompt
     function hidePrompt() {
-      prompt.style.display = 'none';
+        prompt.style.display = 'none';
     }
-  
-    // Handling button clicks for OK and Cancel
+
+    // OK Button: Triggers celebration effect
     promptOkButton.addEventListener('click', function () {
-      hidePrompt();
-      // Trigger a celebration effect (confetti and hearts)
-      triggerCelebration();
+        hidePrompt();
+        triggerCelebration();
+        alert("Yaaay! I love you! ❤️"); // Fallback message for mobile users
     });
-  
+
+    // Cancel Button: Shakes on incorrect input
     promptCancelButton.addEventListener('click', function () {
-      // Add a shake effect on incorrect input (Cancel)
-      promptCancelButton.classList.add('shake');
-      setTimeout(function () {
-        promptCancelButton.classList.remove('shake');
-      }, 500);  // Remove shake effect after 500ms
-    });
-  
-    // Trigger the confetti and hearts effect
-    function triggerCelebration() {
-      // Confetti effect
-      for (let i = 0; i < 50; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.innerText = '💖';
-        heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.animationDelay = `${Math.random() * 2}s`;
-        heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        confettiContainer.appendChild(heart);
-  
-        // Remove the heart after the animation ends
+        promptCancelButton.classList.add('shake');
         setTimeout(function () {
-          heart.remove();
-        }, 3000); // Hearts disappear after 3 seconds
-      }
+            promptCancelButton.classList.remove('shake');
+        }, 500);
+    });
+
+    // Confetti and hearts celebration effect
+    function triggerCelebration() {
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '❤️';
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDelay = `${Math.random() * 2}s`;
+            heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            confettiContainer.appendChild(heart);
+
+            // Remove hearts after animation
+            setTimeout(function () {
+                heart.remove();
+            }, 3000);
+        }
     }
-  
-    // Function to check if the user is ready to be my Valentine
+
+    // Ensure the prompt keeps showing until "OK" is clicked
     function askToBeValentine() {
-      showPrompt();
+        showPrompt();
     }
-  
-    // Prompting the user to click OK or Cancel
-    setTimeout(askToBeValentine, 1000);  // Delay for 1 second to simulate loading
-  
-  });
+
+    // Show the prompt after page loads
+    setTimeout(askToBeValentine, 1500);
+});
