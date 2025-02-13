@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     const decorationsContainer = document.getElementById('decorations');
-    const prompt = document.getElementById('prompt');
     const confettiContainer = document.getElementById('confetti');
+    const prompt = document.getElementById('prompt');
     const promptOkButton = document.getElementById('prompt-ok');
     const promptCancelButton = document.getElementById('prompt-cancel');
+    const buttonsContainer = document.getElementById('buttons');
 
-    // Safe emojis that work on all devices
-    const decorations = ['❤️', '💖', '🎈', '🎀', '💌', '🌹', '✨', '💘', '🎉'];
+    // Valentine's decorations
+    const decorations = ['❤️', '💖', '🎈', '💌', '🌹', '✨', '💘', '🎀', '🎊'];
 
-    // Function to add decoration to the page
+    // Function to add decoration emoji to the page
     function addDecoration(emoji) {
         const emojiElement = document.createElement('div');
         emojiElement.classList.add('decor-item');
@@ -18,23 +19,23 @@ document.addEventListener('DOMContentLoaded', function () {
         decorationsContainer.appendChild(emojiElement);
     }
 
-    // Create buttons dynamically for each decoration
+    // Generate buttons dynamically
     decorations.forEach(function (emoji) {
         const button = document.createElement('button');
         button.classList.add('decor-box');
         button.innerText = emoji;
-        button.onclick = function () {
+        button.addEventListener('click', function () {
             addDecoration(emoji);
-        };
-        document.getElementById('buttons').appendChild(button);
+        });
+        buttonsContainer.appendChild(button);
     });
 
-    // Show the Valentine's prompt
+    // Function to show the popup
     function showPrompt() {
         prompt.style.display = 'flex';
     }
 
-    // Hide the prompt
+    // Function to hide the popup
     function hidePrompt() {
         prompt.style.display = 'none';
     }
@@ -43,10 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
     promptOkButton.addEventListener('click', function () {
         hidePrompt();
         triggerCelebration();
-        alert("Yaaay! I love you! ❤️"); // Fallback message for mobile users
+        alert("Yaaay! I love you! ❤️"); // Fallback message
     });
 
-    // Cancel Button: Shakes on incorrect input
+    // Cancel Button: Shake effect
     promptCancelButton.addEventListener('click', function () {
         promptCancelButton.classList.add('shake');
         setTimeout(function () {
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 500);
     });
 
-    // Confetti and hearts celebration effect
+    // Confetti and hearts animation
     function triggerCelebration() {
         for (let i = 0; i < 30; i++) {
             const heart = document.createElement('div');
@@ -72,11 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Ensure the prompt keeps showing until "OK" is clicked
-    function askToBeValentine() {
-        showPrompt();
-    }
-
-    // Show the prompt after page loads
-    setTimeout(askToBeValentine, 1500);
+    // Ensure the popup appears on page load
+    setTimeout(showPrompt, 1000);
 });
