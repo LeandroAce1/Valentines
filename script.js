@@ -1,102 +1,96 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Keep prompting until "OK" is clicked
-    function askValentine() {
-        let answer = confirm("Will you be my Valentine? 💖");
-        if (answer) {
-            celebrate();
-            setTimeout(() => {
-                alert("YAAAY! I love you! ❤️🥰");
-            }, 1000);
-        } else {
-            shakeScreen();
-            setTimeout(askValentine, 1000);
-        }
-    }
-    
-    askValentine(); // Start the prompt loop
+    const prompt = document.getElementById("prompt");
+    const okButton = document.getElementById("prompt-ok");
+    const cancelButton = document.getElementById("prompt-cancel");
+    const decorationsContainer = document.getElementById("decorations");
+    const confettiContainer = document.getElementById("confetti");
 
-    // Function to shake the screen on cancel
-    function shakeScreen() {
-        document.body.style.animation = "shake 0.5s";
-        setTimeout(() => {
-            document.body.style.animation = "";
-        }, 500);
-    }
-
-    // Function to trigger celebration
+    // Function to show confetti and hearts for celebration
     function celebrate() {
-        const celebrationContainer = document.createElement("div");
-        celebrationContainer.style.position = "fixed";
-        celebrationContainer.style.top = "0";
-        celebrationContainer.style.left = "0";
-        celebrationContainer.style.width = "100vw";
-        celebrationContainer.style.height = "100vh";
-        celebrationContainer.style.pointerEvents = "none";
-        celebrationContainer.style.zIndex = "1000";
-        document.body.appendChild(celebrationContainer);
+        confettiContainer.innerHTML = ""; // Clear old confetti
+        decorationsContainer.innerHTML = ""; // Clear old hearts
 
-        // Create confetti 🎉
         for (let i = 0; i < 50; i++) {
             let confetti = document.createElement("div");
             confetti.innerHTML = "🎉";
-            confetti.style.position = "absolute";
-            confetti.style.fontSize = "2rem";
+            confetti.classList.add("confetti");
             confetti.style.left = Math.random() * 100 + "vw";
-            confetti.style.top = "-5vh";
-            confetti.style.animation = "fall 4s linear infinite";
-            celebrationContainer.appendChild(confetti);
+            confetti.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            confettiContainer.appendChild(confetti);
         }
 
-        // Create floating hearts ❤️
         for (let i = 0; i < 30; i++) {
             let heart = document.createElement("div");
             heart.innerHTML = "❤️";
-            heart.style.position = "absolute";
-            heart.style.fontSize = "2.5rem";
+            heart.classList.add("heart");
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.top = Math.random() * 100 + "vh";
-            heart.style.animation = "float 5s ease-in-out infinite";
-            celebrationContainer.appendChild(heart);
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            decorationsContainer.appendChild(heart);
         }
 
-        // Remove celebration after 7 seconds
         setTimeout(() => {
-            celebrationContainer.remove();
+            confettiContainer.innerHTML = ""; // Remove confetti after 7s
+            decorationsContainer.innerHTML = ""; // Remove hearts
         }, 7000);
     }
 
-    // Function to add decorations when clicking buttons
+    // Shake effect for cancel button
+    function shakePrompt() {
+        prompt.classList.add("shake");
+        setTimeout(() => {
+            prompt.classList.remove("shake");
+        }, 500);
+    }
+
+    // Prompt logic: Keep showing until "OK" is clicked
+    function showPrompt() {
+        prompt.style.display = "flex";
+    }
+
+    okButton.addEventListener("click", function () {
+        prompt.style.display = "none";
+        celebrate();
+        setTimeout(() => {
+            alert("YAAAY! I love you! ❤️🥰");
+        }, 1000);
+    });
+
+    cancelButton.addEventListener("click", function () {
+        shakePrompt();
+        setTimeout(showPrompt, 1000);
+    });
+
+    showPrompt(); // Show prompt on page load
+
+    // Function to add decorations
     function addDecoration(emoji) {
         let decoration = document.createElement("div");
         decoration.innerHTML = emoji;
-        decoration.style.position = "absolute";
-        decoration.style.fontSize = "2rem";
+        decoration.classList.add("decoration");
         decoration.style.left = Math.random() * 100 + "vw";
         decoration.style.top = Math.random() * 100 + "vh";
-        decoration.style.animation = "float 4s ease-in-out infinite";
-        document.body.appendChild(decoration);
+        decorationsContainer.appendChild(decoration);
 
-        // Remove decorations after a while
         setTimeout(() => {
             decoration.remove();
         }, 10000);
     }
 
-    // Event listeners for decoration buttons
-    document.getElementById("heartsButton").addEventListener("click", () => addDecoration("❤️"));
-    document.getElementById("tulipsButton").addEventListener("click", () => addDecoration("🌷"));
-    document.getElementById("giftsButton").addEventListener("click", () => addDecoration("🎁"));
+    // Create buttons dynamically
+    const buttons = [
+        { text: "Add Hearts ❤️", emoji: "❤️" },
+        { text: "Add Tulips 🌷", emoji: "🌷" },
+        { text: "Add Gifts 🎁", emoji: "🎁" },
+        { text: "Add Love Letters 💌", emoji: "💌" },
+        { text: "Add Cupcakes 🧁", emoji: "🧁" }
+    ];
 
-    // Add keyframe animations
-    const styles = document.createElement("style");
-    styles.innerHTML = `
-    @keyframes fall {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(100vh); opacity: 0; }
-    }
-    @keyframes float {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        50% { transform: translateY(-20px) scale(1.1); }
-        100% { transform: translateY(0) scale(1); opacity: 1; }
-    }
-    @keyframes
+    const buttonsContainer = document.getElementById("buttons");
+    buttons.forEach(btn => {
+        let button = document.createElement("button");
+        button.innerText = btn.text;
+        button.classList.add("decor-button");
+        button.addEventListener("click", () => addDecoration(btn.emoji));
+        buttonsContainer.appendChild(button);
+    });
+});
