@@ -1,215 +1,125 @@
-/* General page styling */
+/* General Page Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #f7d1d7, #f2e1ff);
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
     text-align: center;
+    background: linear-gradient(to bottom, #ffb6c1, #ff69b4);
+    color: white;
+    margin: 0;
     overflow: hidden;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: #ff66b2;
-    margin: 20px 0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  p {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: bold;
-    padding: 0 10px;
-  }
-  
-  .decor-box {
-    background-color: #ff66b2;
-    border-radius: 15px;
-    padding: 20px 40px;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: white;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 70%;
-  }
-  
-  .decor-box:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  #decorations {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    max-width: 80%;
-  }
-  
-  .decor-item {
-    font-size: 3rem;
-    transition: transform 0.3s ease;
-  }
-  
-  .decor-item:hover {
-    transform: rotate(15deg);
-  }
-  
-  .prompt {
-    display: none;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+}
+
+/* Popup for Valentine's Question */
+.popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
     align-items: center;
-    flex-direction: column;
-    animation: fadeIn 1s;
-  }
-  
-  .prompt p {
-    font-size: 1.8rem;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    color: black;
     padding: 20px;
-  }
-  
-  .prompt button {
-    background-color: #ff66b2;
-    border: none;
-    padding: 15px 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    font-size: 18px;
     margin: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+#prompt-ok {
+    background-color: #ff69b4;
     color: white;
-    border-radius: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 60%;
-  }
-  
-  .prompt button:hover {
-    background-color: #ff3399;
-    transform: scale(1.1);
-  }
-  
-  .shake {
-    animation: shake 0.3s ease-out;
-  }
-  
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-    75% { transform: translateX(-10px); }
-    100% { transform: translateX(0); }
-  }
-  
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  
-  /* Celebration Styles */
-  .confetti {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 9999;
-  }
-  
-  .heart {
+}
+
+#prompt-ok:hover {
+    background-color: #ff1493;
+}
+
+#prompt-cancel {
+    background-color: #ccc;
+    color: black;
+}
+
+#prompt-cancel:hover {
+    background-color: #888;
+}
+
+/* Shake Animation for Cancel Button */
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+/* Decoration Buttons */
+.button-container {
     position: absolute;
-    font-size: 3rem;
-    animation: heartAnim 1.5s ease-in-out infinite;
-    opacity: 0.8;
-  }
-  
-  @keyframes heartAnim {
-    0% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-40px) scale(1.5); }
-    100% { transform: translateY(0) scale(1); }
-  }
-  
-  /* Responsive adjustments for mobile */
-  @media screen and (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-    }
-  
-    p {
-      font-size: 1rem;
-    }
-  
-    .decor-box {
-      font-size: 1.2rem;
-      width: 80%;
-    }
-  
-    .prompt p {
-      font-size: 1.5rem;
-      padding: 15px;
-    }
-  
-    .prompt button {
-      font-size: 1.2rem;
-      width: 70%;
-    }
-  
-    #decorations {
-      gap: 10px;
-    }
-  
-    .decor-item {
-      font-size: 2.5rem;
-    }
-  }
-  
-  /* For smaller screens like mobile */
-  @media screen and (max-width: 480px) {
-    h1 {
-      font-size: 1.5rem;
-    }
-  
-    p {
-      font-size: 0.9rem;
-    }
-  
-    .decor-box {
-      font-size: 1rem;
-      width: 90%;
-    }
-  
-    .prompt p {
-      font-size: 1.2rem;
-      padding: 10px;
-    }
-  
-    .prompt button {
-      font-size: 1rem;
-      width: 80%;
-    }
-  
-    #decorations {
-      gap: 5px;
-    }
-  
-    .decor-item {
-      font-size: 2rem;
-    }
-  }
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.decor-box {
+    font-size: 24px;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ff69b4;
+    transition: 0.3s;
+}
+
+.decor-box:hover {
+    background-color: #ff69b4;
+    color: white;
+}
+
+/* Decorations */
+.decor-item {
+    position: absolute;
+    font-size: 30px;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+/* Confetti and Heart Animation */
+.heart {
+    position: fixed;
+    font-size: 30px;
+    animation: fall 2s linear forwards;
+}
+
+@keyframes fall {
+    from { transform: translateY(-10vh); opacity: 1; }
+    to { transform: translateY(100vh); opacity: 0; }
+}
