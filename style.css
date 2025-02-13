@@ -11,20 +11,22 @@ body {
     height: 100vh;
     flex-direction: column;
     text-align: center;
+    overflow: hidden;
   }
   
   h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     color: #ff66b2;
     margin: 20px 0;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   }
   
   p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #333;
     margin-bottom: 30px;
     font-weight: bold;
+    padding: 0 10px;
   }
   
   .decor-box {
@@ -33,11 +35,12 @@ body {
     padding: 20px 40px;
     margin: 10px;
     cursor: pointer;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: white;
     border: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 70%;
   }
   
   .decor-box:hover {
@@ -50,7 +53,8 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 15px;
+    max-width: 80%;
   }
   
   .decor-item {
@@ -77,6 +81,11 @@ body {
     animation: fadeIn 1s;
   }
   
+  .prompt p {
+    font-size: 1.8rem;
+    padding: 20px;
+  }
+  
   .prompt button {
     background-color: #ff66b2;
     border: none;
@@ -88,6 +97,7 @@ body {
     border-radius: 25px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 60%;
   }
   
   .prompt button:hover {
@@ -136,3 +146,70 @@ body {
     100% { transform: translateY(0) scale(1); }
   }
   
+  /* Responsive adjustments for mobile */
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  
+    .decor-box {
+      font-size: 1.2rem;
+      width: 80%;
+    }
+  
+    .prompt p {
+      font-size: 1.5rem;
+      padding: 15px;
+    }
+  
+    .prompt button {
+      font-size: 1.2rem;
+      width: 70%;
+    }
+  
+    #decorations {
+      gap: 10px;
+    }
+  
+    .decor-item {
+      font-size: 2.5rem;
+    }
+  }
+  
+  /* For smaller screens like mobile */
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+  
+    p {
+      font-size: 0.9rem;
+    }
+  
+    .decor-box {
+      font-size: 1rem;
+      width: 90%;
+    }
+  
+    .prompt p {
+      font-size: 1.2rem;
+      padding: 10px;
+    }
+  
+    .prompt button {
+      font-size: 1rem;
+      width: 80%;
+    }
+  
+    #decorations {
+      gap: 5px;
+    }
+  
+    .decor-item {
+      font-size: 2rem;
+    }
+  }
